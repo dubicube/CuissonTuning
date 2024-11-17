@@ -5,6 +5,11 @@ Using a [Proline IH234P](https://reunion.darty-dom.com/p/proline-ih234p-noir#), 
 
 The AVR microcontroller and the relays are powered with the 5V provided by the tactile board of the cooktop. The 220VAC->5VDC power supply is powered on with the input 220V through the relays, to generate the 5V for LED strips only when they are used.
 
+This repository contains the source code of the microcontroller. It includes several features:
+- RGB LED strip programming, accoding to the cooktop state
+- Control of the 2 220V relays to power on/off the 5V supply for the LED strips
+- Reception of communication frames between the 2 boards of the cooktop
+
 The AVR microcontroller spies the communication between the cooktop tactile board and power board, to detect:
 - General power on/off
 - Cooking power on the 2 sides (front and back)
@@ -20,7 +25,7 @@ To do so, the communication protocol between the 2 cooktop boards has been rever
 - However, sometimes the slave sends additional byte commands, thus increasing the communication period loop above 220ms.
 - When the slave sends the 0x80 command byte, the master response contains a flag indicating if the cooktop is on or off.
 - When the slave sends the 0x20 command byte, the master response contains the front side cooking power. Same with the 0x1F command byte, but for the back side.
-- When the slave sends the 0x6A command byte, the master response contains other information about the front side, including some status bits used to detect presence/absence of a pane. Same with the 0xE9 command byte, but for the back side.
+- When the slave sends the 0x6A command byte, the master response contains other information about the front side, including some status bits used to detect presence/absence of a pane. Same with the 0xE9 command byte, but for the back side. These responses seem to also contain the temperature of each side, however I have no idea of the unit that is used, and I don't even know if sent values are linear with celsius degrees. I think these values are used by the tactile board to indicate the 'H' state when the plate is hot, even after the cooktop is turned off. Maybe these numerical values actually don't have easy conversion formulas with usable temperature scales, and the 'H' state is maybe triggered only with hard-coded trigger values. Anyway, I didn't dug further around these values, and I currently don't use them in the code.
 
 Example of several exchanges between the tactile and power boards of the cooktop :
 ![trame](https://github.com/user-attachments/assets/c92243a6-a673-4346-98fb-9915d4477c33)
