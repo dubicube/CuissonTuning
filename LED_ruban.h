@@ -33,14 +33,4 @@ void LED_setFullColor(uint8_t c);
 void LED_getRainbowColor(uint8_t* r, uint8_t* g, uint8_t* b, uint8_t index);
 void LED_clear();
 
-void LED_setAlim(uint8_t alim);
-void LED_setColorStep(uint8_t c);
-
-void LED_clearScreen();
-void LED_setPixel(uint8_t posx, uint8_t posy, uint8_t red, uint8_t green, uint8_t blue);
-void LED_setNumber(uint8_t posx, uint8_t posy, uint8_t v, uint8_t cr, uint8_t cg, uint8_t cb);
-void LED_setNumber2(uint8_t posx, uint8_t posy, uint8_t v, uint8_t cr, uint8_t cg, uint8_t cb);
-void LED_setNumber4(uint8_t posx, uint8_t posy, uint16_t v, uint8_t cr, uint8_t cg, uint8_t cb);
-void LED_refreshScreen();
-
 #endif
